@@ -13,13 +13,13 @@ public class Player extends GameObject {
 
 	@Override
 	public void tick() {
-
-		x+=velx;
-		y+=vely;
-		if(x>800 || y>800 ||x<0 || y<0) {
-			x=0;
-			y=0;
+		if(x>=800 || y>=800 ||x<=0 || y<=0) {
+			x=400;
+			y=400;
 		}
+		x+=Game.joe.getXVector(x, y) + velx;
+		y+=Game.joe.getYVector(x, y) + vely;
+
 	}
 
 	@Override
@@ -29,8 +29,8 @@ public class Player extends GameObject {
 		float green = rand.nextFloat();
 		float blu = rand.nextFloat();
 		Color random = new Color(red,green,blu);
-		g.setColor(random);
-		g.fillRect(x, y, 10, 10);
+		g.setColor(Color.BLACK);
+		g.fillOval(x, y, 10, 10);
 	}
 
 	
