@@ -15,7 +15,7 @@ public class Root extends GameObject{
 	
 	@Override
 	public void render(Graphics allensdumb) {
-		allensdumb.setColor(Color.BLACK);
-		allensdumb.fillOval(x, y, 8, 8);
+		//allensdumb.setColor(Color.BLACK);
+		//allensdumb.fillOval(x, y, 8, 8);
 	}
 }

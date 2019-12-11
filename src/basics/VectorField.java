@@ -12,7 +12,7 @@ public class VectorField{
         
 	for(int i =0;i<xCoords.length;i++) {
         	xCoords[i]=xCoords[i]*800/6+400;
-        	yCoords[i]=yCoords[i]*800/6+400;
+        	yCoords[i]=800-(yCoords[i]*800/6+400);
         }
 	
     		this.xVector = generateXVector(xCoords, yCoords, scalars);
@@ -24,7 +24,14 @@ public class VectorField{
             for (int x = 0; x < xVector.length; x++) {
                     for (int y = 0; y < xVector[x].length; y++) {
                             for (int i = 0; i < xCoords.length; i++) {
-                                    xVector[x][y] += scalars[i] * (1 / (Math.pow((x - xCoords[i]), 2) + Math.pow((y - yCoords[i]), 2))) * (Math.cos(Math.atan((yCoords[i] - y) / (xCoords[i] - x)))) * Math.abs(xCoords[i] - x) / (xCoords[i] - x);
+                                if (xCoords[i]<x) {
+                                	xVector[x][y] -= scalars[i] * (1 /(0.01+Math.sqrt(Math.pow(x - xCoords[i], 2) + Math.pow(y-yCoords[i], 2))));
+                                }
+                                else {
+                                	xVector[x][y] += scalars[i] * (1 /(0.01+Math.sqrt(Math.pow(x - xCoords[i], 2) + Math.pow(y-yCoords[i], 2))));
+                                }
+                            	//xVector[x][y] += scalars[i] * (1 / (Math.pow((x - xCoords[i]), 2) + Math.pow((y - yCoords[i]), 2))) * (Math.cos(Math.atan((yCoords[i] - y) / (xCoords[i] - x)))) * Math.abs(xCoords[i] - x) / (xCoords[i] - x);
+                                  
                             }
                     }
             }
@@ -36,7 +43,14 @@ public class VectorField{
             for (int x = 0; x < yVector.length; x++) {
                     for (int y = 0; y < yVector[x].length; y++) {
                             for (int i = 0; i < xCoords.length; i++) {
-                                    yVector[x][y] += scalars[i] * (1 / (Math.pow((x - xCoords[i]), 2) + Math.pow((y - yCoords[i]), 2))) * (Math.sin(Math.atan((yCoords[i] - y) / (xCoords[i] - x)))) * Math.abs(xCoords[i] - x) / (xCoords[i] - x);
+                            	if (yCoords[i]<y) {
+                            		yVector[x][y] -= scalars[i] * (1 /(0.01+Math.sqrt(Math.pow(x - xCoords[i], 2) + Math.pow(y-yCoords[i], 2))));
+                            	}
+                            	else {
+                            		yVector[x][y] += scalars[i] * (1 /(0.01+Math.sqrt(Math.pow(x - xCoords[i], 2) + Math.pow(y-yCoords[i], 2))));
+                                }
+                            	//yVector[x][y] += scalars[i] * (1 / (Math.pow((x - xCoords[i]), 2) + Math.pow((y - yCoords[i]), 2))) * (Math.sin(Math.atan((yCoords[i] - y) / (xCoords[i] - x)))) * Math.abs(xCoords[i] - x) / (xCoords[i] - x);
+                                
                             }
                     }
             }
@@ -44,25 +58,35 @@ public class VectorField{
     }
 
     public double getXVector(int x, int y){
-    	if(x<0 || x>800) {
+    	if(x<0) {
             x=0;
             }
-        if(y<0 || y>800) {
+    	else if(x>789) {
+    		x=789;
+    	}
+        if(y<0) {
             y=0;	
-            }    
+            } 
+        else if(y>789) {
+        	y=789;
+        }
     	
     	return this.xVector[x][y];
     }
 
     public double getYVector(int x, int y){
-            if(x<0 || x>800) {
-            x=400;
-            	
+    	if(x<0) {
+            x=0;
             }
-            if(y<0 || y>800) {
-            y=400;	
-            	
-            }
+    	else if(x>789) {
+    		x=789;
+    	}
+        if(y<0) {
+            y=0;	
+            } 
+        else if(y>789) {
+        	y=789;
+        }
     		return this.yVector[x][y];
     }
 

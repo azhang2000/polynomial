@@ -5,6 +5,8 @@ public abstract class GameObject {
 	protected int x,y;
 	protected ID id;
 	protected int velx, vely;
+	protected boolean spaceEntered = false;
+	
 	public GameObject(int x, int y, ID id)
 	{
 		this.x = x;
@@ -45,6 +47,10 @@ public abstract class GameObject {
 	public int getVelY() {
 		return vely;
 	}
-	
-	
+	public void setSpace() {
+		spaceEntered = true;
+	}
+	public boolean getSpace() {
+		return spaceEntered;
+	}
 }
