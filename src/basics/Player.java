@@ -20,7 +20,8 @@ public class Player extends GameObject {
 		this.xFixed = xFixed;
 		this.yFixed = yFixed;
 		this.scalar = scalar;
-		File file = new File("/Users/yunzhou/eclipse-workspace/TestGame/src/maps/death.wav");
+		URL urldeath = Game.class.getResource("/maps/death.wav");
+		File file = new File(urldeath.getFile());
 		death = new Sound(file.getPath());
 		
 	}

@@ -1,4 +1,5 @@
 package basics;
+import basics.*;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -8,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -116,7 +118,8 @@ public class Game extends Canvas implements Runnable{
 		if (user.getX()>= 750 && user.getY()>=750) {
 			user.setX(0);
 			user.setY(0);
-			Sound anotherone = new Sound("/Users/yunzhou/eclipse-workspace/TestGame/src/maps/anotherone.wav");
+			URL urlanotherone = Game.class.getResource("/maps/anotherone.wav");
+			Sound anotherone = new Sound(urlanotherone.getFile());
 			anotherone.play();
 			currentMap++;
 			score += 1000 - (10 * user.getDeaths());
@@ -172,7 +175,8 @@ public class Game extends Canvas implements Runnable{
 
 	
 	public static void main(String [] args) throws IOException {
-		Sound music = new Sound("/Users/yunzhou/eclipse-workspace/TestGame/src/maps/music.wav");
+		URL urlMusic = Game.class.getResource("/maps/music.wav");
+		Sound music = new Sound(urlMusic.getFile());
 		music.play();
 		music.loop();
 		music.setVolume(0.2f);
